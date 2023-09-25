@@ -481,7 +481,9 @@ Node* uniformCostGraphSearch(Node* rootNode){
     int totalGenerated = 0;
     int totalExpanded = 0;
     clock_t t;
+    clock_t t2;
     t = clock();
+    double time_taken;
     
     //initialize the search tree using the root node
     //set the starting fringe (set of reachable but unexpanded nodes)
@@ -502,8 +504,8 @@ Node* uniformCostGraphSearch(Node* rootNode){
         if (isGoalState(currentNode->state)) {
             finished = true;
             totalExpanded++;
-            t = clock() - t;
-            double time_taken = ((double)t)/CLOCKS_PER_SEC; // calculate the elapsed time
+            t2 = clock() - t;
+            time_taken = ((double)t2)/CLOCKS_PER_SEC; // calculate the elapsed time
             printf("\n---\ntotGen: %d, totExp: %d, time: %f\n", totalGenerated, totalExpanded, time_taken);
             
             printFromGoal(currentNode);
@@ -543,7 +545,15 @@ Node* uniformCostGraphSearch(Node* rootNode){
             }
             free(successors);
             if (debug || totalExpanded < 7){printWorld(currentNode);}
-            else{printf(".\n");}
+            else{
+                if (totalExpanded % 1000 == 0)
+                {
+                    t2 = clock() - t;
+                    time_taken = ((double)t2)/CLOCKS_PER_SEC; // calculate the elapsed time
+                    printf("\n---\ntotGen: %d, totExp: %d, time: %f\n", totalGenerated, totalExpanded, time_taken);
+                }
+            }
+        }
             insert(closed, currentNode);
         }
         
