@@ -453,7 +453,7 @@ Node* uniformCostTreeSearch(Node* rootNode){
         }
         //else: expand the node and update the fringe to include any new discovered nodes
         int numSuccessors;
-        Node** successors = expandNode(currentNode, &numSuccessors, true);
+        Node** successors = expandNode(currentNode, &numSuccessors, false);
         totalGenerated += numSuccessors;
         totalExpanded++;
         for (int i = 0; i < numSuccessors; i++) {
@@ -468,6 +468,16 @@ Node* uniformCostTreeSearch(Node* rootNode){
                 t2 = clock() - t;
                 time_taken = ((double)t2)/CLOCKS_PER_SEC; // calculate the elapsed time
                 printf("\n---\ntotGen: %d, totExp: %d, time: %f\n", totalGenerated, totalExpanded, time_taken);
+                if (time_taken >= 3600.0){
+                    printf("an hour has elapsed. give up.\n");
+
+                    printFromGoal(currentNode);
+                    //free the space
+                    free(fringe->array);
+                    free(fringe);
+                    free(closed->array);
+                    free(closed);
+                }
             }
             
         }
@@ -551,9 +561,18 @@ Node* uniformCostGraphSearch(Node* rootNode){
                     t2 = clock() - t;
                     time_taken = ((double)t2)/CLOCKS_PER_SEC; // calculate the elapsed time
                     printf("\n---\ntotGen: %d, totExp: %d, time: %f\n", totalGenerated, totalExpanded, time_taken);
+                    if (time_taken >= 3600.0){
+                        printf("an hour has elapsed. give up.\n");
+
+                        printFromGoal(currentNode);
+                        //free the space
+                        free(fringe->array);
+                        free(fringe);
+                        free(closed->array);
+                        free(closed);
+                    }
                 }
             }
-        }
             insert(closed, currentNode);
         }
         
@@ -618,6 +637,16 @@ Node* iterativeDeepeningTreeSearch(Node* rootNode){
                 t2 = clock() - t;
                 time_taken = ((double)t2)/CLOCKS_PER_SEC; // calculate the elapsed time
                 printf("\n---\ntotGen: %d, totExp: %d, time: %f\n", totalGenerated, totalExpanded, time_taken);
+                if (time_taken >= 3600.0){
+                    printf("an hour has elapsed. give up.\n");
+
+                    printFromGoal(currentNode);
+                    //free the space
+                    free(fringe->array);
+                    free(fringe);
+                    free(closed->array);
+                    free(closed);
+                }
             }
             
         }
