@@ -1,0 +1,2 @@
+searchalgorithms : searchalgorithms.c
+	cc searchalgorithms.c -o searchalgorithms
