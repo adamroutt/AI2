@@ -475,8 +475,6 @@ Node* uniformCostTreeSearch(Node* rootNode){
                     //free the space
                     free(fringe->array);
                     free(fringe);
-                    free(closed->array);
-                    free(closed);
                 }
             }
             
@@ -644,8 +642,6 @@ Node* iterativeDeepeningTreeSearch(Node* rootNode){
                     //free the space
                     free(fringe->array);
                     free(fringe);
-                    free(closed->array);
-                    free(closed);
                 }
             }
             
